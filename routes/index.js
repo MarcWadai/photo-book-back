@@ -3,7 +3,7 @@ var router = express.Router();
 const AWS = require('aws-sdk');
 var multerS3 = require('multer-s3');
 const multer = require('multer');
-const keys = require('../key');
+const config = require('../config');
 const BUCKET_NAME = 'marcoucou-photo-book';
 const REGION = 'eu-west-1';
 const mongoMgmt = require('../services/db_mgmt');
@@ -11,8 +11,8 @@ const cors = require('cors');
 
 
 AWS.config.update({
-  accessKeyId: keys.iam_access_id,
-  secretAccessKey: keys.iam_secret,
+  accessKeyId: config.iam_access_id,
+  secretAccessKey: config.iam_secret,
   region: REGION,
 });
 
