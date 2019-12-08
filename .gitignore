@@ -1,0 +1,7 @@
+script/
+node_modules/
+public/
+package-lock.json
+key.js
+
+
