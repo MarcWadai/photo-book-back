@@ -45,7 +45,9 @@ router.post('/data', async function(req, res, next) {
 /* GET elements stories. */
 router.get('/data', cors(), async function(req, res, next) {
   try {
-    const result = await mongoMgmt.get();
+    const date = req.query.year;
+    console.log('date', date);
+    const result = await mongoMgmt.get(date);
     res.send(result)
   } catch(err) {
     res.status(err).send(err);

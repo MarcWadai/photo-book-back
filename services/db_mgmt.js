@@ -34,17 +34,24 @@ function insert(data) {
     })
 }
 
-function get() {
+function get(year) {
     return new Promise((resolve, reject) => {
         connect().then(db => {
             const collection = db.collection(COLLECTION_NAME);
-            const filter = {
+            let filter = {};
+            if (year) {
+                const yearplusone = parseInt(year, 10) + 1;
+                filter = {
+                    "date": {
+                        $gte: new Date(`${year}-01-01T00:00:00.000Z`),
+                        $lt: new Date(`${yearplusone}-01-01T00:00:00.000Z`),
+                    }
+                }
             }
             const sort = {
                 date: 1
             }
-            console.log('collection', collection)
-            collection.find().sort(sort).toArray().then(function(items) {
+            collection.find(filter).sort(sort).toArray().then(function(items) {
                 console.log('items', items)
                 resolve(items)
             }).catch(err => reject(err));
