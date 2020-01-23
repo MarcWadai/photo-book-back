@@ -27,7 +27,7 @@ var upload = multer({
       key: function (req, file, cb) {
         console.log('req', req);
           console.log(file);
-          cb(null, file.originalname); //use Date.now() for unique file keys
+          cb(null, `${Date.now().toString()}${file.originalname}`); //use Date.now() for unique file keys
       }
   })
 });

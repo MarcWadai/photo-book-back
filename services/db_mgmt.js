@@ -26,7 +26,7 @@ function insert(data) {
     return new Promise((resolve, reject) => {
         connect().then(db => {
             const collection = db.collection(COLLECTION_NAME);
-            collection.insertOne(data, function inserting(err, count, status) {
+            collection.insertOne({...data, date: new Date(data.date)}, function inserting(err, count, status) {
                 if (err) return reject(err)
                 resolve(status);
             })
